@@ -80,13 +80,27 @@ function createSidebar() {
 
 }
 
+function createNothingPlaceHolder() {
+    const nothingDiv = document.createElement("div");
+    nothingDiv.className = "flex flex-col items-center  gap-5"
+
+
+    const voidImage = new Image();
+    voidImage.src = voidImageSrc;
+    voidImage.className = "w-72 md:w-80 lg:w-96 my-12 mx-auto";
+    nothingDiv.appendChild(voidImage);
+
+
+    return nothingDiv;
+}
+
 function createToDoSection() {
     const body = document.querySelector("body");
 
     const section = document.createElement("section");
-    section.className = "col-span-4 flex  flex-col";
+    section.className = "col-span-4 flex  flex-col m-10";
     const header = document.createElement("header");
-    header.className = "flex p-5 gap-5 items-center  bg-blue-500 rounded m-5"
+    header.className = "flex p-5 gap-5"
     const [day, date, month] = timeNow();
     const timeDiv = document.createElement("div");
     timeDiv.className = "flex flex-col justify-center items-center gap-1"
@@ -96,44 +110,59 @@ function createToDoSection() {
 
     const dayHeading = document.createElement("h3");
     dayHeading.textContent = day;
+    dayHeading.className = "font-medium text-lg text-gray-500";
 
     const monthHeading = document.createElement("h4");
     monthHeading.textContent = month;
+    monthHeading.className = "font-small text-base text-gray-400";
 
     timeDiv.appendChild(dayHeading);
     timeDiv.appendChild(dateHeading);
     timeDiv.appendChild(monthHeading);
     header.appendChild(timeDiv)
 
+    const heroTextDiv = document.createElement("div");
     const heading = document.createElement("h2");
-    heading.textContent = "Today you have ... tasks";
+    heading.textContent = "Good Morning!";
     heading.className = "text-2xl"
-    header.appendChild(heading);
+    heroTextDiv.appendChild(heading);
+
+    const heroParagraph = document.createElement("p");
+    heroParagraph.textContent = "Stay organized, get things done."
+    heroTextDiv.appendChild(heroParagraph);
+
+    header.appendChild(heroTextDiv);
 
     section.appendChild(header);
 
 
     const toDoListSection = document.createElement("section");
+    toDoListSection.className = "flex flex-col gap-5";
 
-    const addTaskButton = document.createElement("button");
-    addTaskButton.textContent = "+ Add Task";
-    toDoListSection.appendChild(addTaskButton);
+    const addTaskSection = document.createElement("section");
+    addTaskSection.className = "flex flex-1 gap-2 p-2 rounded shadow-lg relative"
 
-    const voidImage = new Image();
-    voidImage.src = voidImageSrc;
-    voidImage.className = "w-72 md:w-80 lg:w-96";
-    toDoListSection.appendChild(voidImage);
+    const addIcon = document.createElement("div");
+    addIcon.textContent = "+";
+    addIcon.className = "font-medium text-gray-500 absolute inset-y-0 left-4 flex items-center pl-2"
+    addTaskSection.appendChild(addIcon)
 
-    const nothingHeading = document.createElement("h3");
-    nothingHeading.textContent = "Nothing Here..."
-    nothingHeading.className = "text-3xl"
-    toDoListSection.appendChild(nothingHeading);
+    const addTaskInput = document.createElement("input");
+    addTaskInput.type = "text";
+    addTaskInput.placeholder = "Add Task";
+    addTaskInput.className = "flex-1 placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+    addTaskSection.appendChild(addTaskInput);
+
+    toDoListSection.appendChild(addTaskSection);
+
+    toDoListSection.appendChild(createNothingPlaceHolder());
 
     section.appendChild(toDoListSection);
 
     body.appendChild(section);
     
 }
+
 
 function createView() {
     const body = document.querySelector("body");
