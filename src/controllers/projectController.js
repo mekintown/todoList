@@ -5,7 +5,7 @@ function timeNow() {
     ];
   
     const currentDate = new Date();
-    const day = currentDate.toLocaleString("en-us", { weekday: "long" });
+    const day = currentDate.toLocaleString("en-us", { weekday: "short" });
     const date = currentDate.getDate();
     const month = monthInitials[currentDate.getMonth()];
   
