@@ -54,7 +54,7 @@ function createSidebar() {
     projectSection.className = "flex self-stretch";
 
     const projectSectionHeader = document.createElement("header");
-    projectSectionHeader.className = "flex self-center justify-between cursor-pointer py-3 px-5  hover:bg-gray-200";
+    projectSectionHeader.className = "flex flex-1 items-center justify-between cursor-pointer py-3 px-5  hover:bg-gray-200";
 
     const myProjectHeading = document.createElement("h3");
     myProjectHeading.textContent = "My Projects";
@@ -86,7 +86,7 @@ function createToDoSection() {
     const section = document.createElement("section");
     section.className = "col-span-4 flex  flex-col";
     const header = document.createElement("header");
-    header.className = "flex p-5 gap-5 items-center  bg-blue-500 rounded"
+    header.className = "flex p-5 gap-5 items-center  bg-blue-500 rounded m-5"
     const [day, date, month] = timeNow();
     const timeDiv = document.createElement("div");
     timeDiv.className = "flex flex-col justify-center items-center gap-1"
