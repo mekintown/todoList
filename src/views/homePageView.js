@@ -13,7 +13,8 @@ import "../style.css";
 
 function createSidebar() {
     const sidebar = document.createElement("section");
-    sidebar.className = "flex flex-col items-start gap-10 py-5";
+    sidebar.className =
+        "flex flex-col items-start gap-10 py-5 h-screen sticky top-0";
 
     const logoHeading = document.createElement("h3");
     logoHeading.textContent = "TodoList";

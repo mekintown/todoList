@@ -8,7 +8,7 @@ function renderTask(tasks) {
     TaskManager.tasks.forEach((task) => {
         const taskDiv = document.createElement("div");
         taskDiv.className =
-            "flex justify-between self-stretch items-center rounded bg-gray-50 shadow-lg p-3";
+            "flex justify-between self-stretch items-center rounded bg-white shadow-lg p-3 cursor-pointer hover:bg-gray-50";
 
         const leftTask = document.createElement("div");
         leftTask.className = "flex justify-between gap-2";
@@ -37,7 +37,8 @@ function renderTask(tasks) {
 
         const closeButton = new Image();
         closeButton.src = trashSrc;
-        closeButton.className = "w-4 text-slate-400 cursor-pointer";
+        closeButton.className =
+            "w-4 text-slate-400 cursor-pointer hover:animate-shake";
         rightTask.appendChild(closeButton);
 
         taskDiv.appendChild(rightTask);
