@@ -1,6 +1,6 @@
 import Event from "../models/Event";
 
-const eventAggregator = () => {
+const eventAggregator = (() => {
   const events = [];
 
   const getEvent = (eventName) => {
@@ -34,7 +34,7 @@ const eventAggregator = () => {
     event.addHandler(handler);
   };
 
-  return { publish, subscribe };
-};
+  return { events ,publish, subscribe };
+})();
 
 export default eventAggregator;

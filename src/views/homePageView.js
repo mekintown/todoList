@@ -1,9 +1,13 @@
-import {timeNow, generateGreetingMessage} from "../controllers/projectController";
+import {
+  timeNow,
+  generateGreetingMessage,
+} from "../controllers/projectController";
 import voidImageSrc from "../assets/img/void.svg";
 import todayIconSrc from "../assets/img/todayIcon.svg";
 import addTaskIconSrc from "../assets/img/up.svg";
 import allTaskIconSrc from "../assets/img/allTaskIcon.svg";
-import {createAddTaskModal, createOverlay} from "./modalView";
+// import {createAddTaskModal, createOverlay} from "./modalView";
+import eventAggregator from "../utils/eventAggregator";
 
 import "../style.css";
 
@@ -110,14 +114,14 @@ function createAddTaskSection() {
   addTaskInput.placeholder = "Add Task";
   addTaskInput.className =
     "flex-1 placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm";
-    addTaskInput.addEventListener("keydown", (event) => {
-        if (event.code === "Enter") {
-            console.log(event.target.value);
-        }
-      })
-  
-    addTaskSection.appendChild(addTaskInput);
-  
+  addTaskInput.addEventListener("keydown", (event) => {
+    if (event.code === "Enter") {
+      eventAggregator.publish("addTask", { taskName: event.target.value });
+      console.log("Add Task Published");
+    }
+  });
+
+  addTaskSection.appendChild(addTaskInput);
 
   const addTaskIcon = new Image();
   addTaskIcon.src = addTaskIconSrc;
@@ -125,13 +129,10 @@ function createAddTaskSection() {
     "font-medium text-gray-500 absolute inset-y-0 top-3 right-4 flex items-center pl-2 cursor-pointer";
   addTaskSection.appendChild(addTaskIcon);
 
-
-
   return addTaskSection;
 }
 
 function createToDoSection() {
-  
   const section = document.createElement("section");
   section.className = "col-span-4 flex  flex-col m-10";
   const header = document.createElement("header");
