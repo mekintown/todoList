@@ -7,10 +7,26 @@ const runProjectScript = () => {
     const defaultProject = Project("Home");
     ProjectManager.addProject(defaultProject);
 
-    eventAggregator.subscribe("addProject", (eventArgs) => {
+    eventAggregator.subscribe("addProjectRequest", () => {
+        const overlay = document.querySelector(".overlay");
+        overlay.classList.remove("invisible");
+        console.log("yeah");
+        const addTaskModal = document.querySelector(".addProjectModal");
+        addTaskModal.classList.remove("invisible");
+    });
+
+    eventAggregator.subscribe("addProjectRequestCancel", () => {
+        const overlay = document.querySelector(".overlay");
+        overlay.classList.add("invisible");
+
+        const addTaskModal = document.querySelector(".addProjectModal");
+        addTaskModal.classList.add("invisible");
+    });
+    eventAggregator.subscribe("addProjectSubmit", (eventArgs) => {
         const project = Project(eventArgs.title);
         ProjectManager.addProject(project);
-        renderProject(eventArgs.projectsDiv);
+        eventAggregator.publish("addProjectRequestCancel");
+        renderProject(document.querySelector(".projectsDiv"));
     });
 };
 

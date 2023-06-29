@@ -92,6 +92,7 @@ export function createOverlay() {
         "invisible overlay fixed inset-0 w-full h-full opacity-30 bg-gray-200 z-49";
     overlay.addEventListener("click", () => {
         eventAggregator.publish("editTaskRequestCancel");
+        eventAggregator.publish("addProjectRequestCancel");
     });
     return overlay;
 }
@@ -99,13 +100,41 @@ export function createOverlay() {
 export function createAddProjectModal() {
     const modal = document.createElement("section");
     modal.className =
-        "flex flex-col  items-stretch justify-center w-96 gap-5 p-5 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-50  drop-shadow rounded z-50";
+        "addProjectModal invisible flex flex-col  items-stretch justify-center w-96 gap-5 p-5 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-50  drop-shadow rounded z-50";
 
     const projectTitleInput = document.createElement("input");
     projectTitleInput.type = "text";
     projectTitleInput.placeholder = "Project Title";
     projectTitleInput.className = "p-3";
+
     modal.appendChild(projectTitleInput);
+
+    const buttonSection = document.createElement("div");
+    buttonSection.className = "grid grid-cols-2 gap-10";
+    const clearButton = document.createElement("button");
+    clearButton.textContent = "Clear";
+    clearButton.className =
+        "bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded";
+    buttonSection.appendChild(clearButton);
+    clearButton.addEventListener("click", () => {
+        event.preventDefault();
+        projectTitleInput.value = "";
+    });
+
+    const addButton = document.createElement("button");
+    addButton.textContent = "Add";
+    addButton.className =
+        "bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded";
+    buttonSection.appendChild(addButton);
+    addButton.addEventListener("click", () => {
+        event.preventDefault();
+        eventAggregator.publish("addProjectSubmit", {
+            title: projectTitleInput.value,
+        });
+        projectTitleInput.value = "";
+    });
+
+    modal.appendChild(buttonSection);
 
     return modal;
 }

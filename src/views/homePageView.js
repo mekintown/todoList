@@ -69,6 +69,9 @@ function createSidebar() {
     const projectSectionHeader = document.createElement("header");
     projectSectionHeader.className =
         "flex flex-1 items-center justify-between cursor-pointer py-3 px-5  hover:bg-gray-200";
+    projectSectionHeader.addEventListener("click", () => {
+        eventAggregator.publish("addProjectRequest");
+    });
 
     const myProjectHeading = document.createElement("h3");
     myProjectHeading.textContent = "My Projects";
@@ -83,7 +86,7 @@ function createSidebar() {
     projectSection.appendChild(projectSectionHeader);
 
     const projectsDiv = document.createElement("div");
-    projectsDiv.className = "flex flex-col";
+    projectsDiv.className = "projectsDiv flex flex-col";
     renderProject(projectsDiv);
     projectSection.appendChild(projectsDiv);
 
@@ -202,6 +205,7 @@ function createView() {
     const body = document.querySelector("body");
     body.appendChild(createOverlay());
     body.appendChild(createAddTaskModal());
+    body.appendChild(createAddProjectModal());
     body.className = "grid grid-cols-5 w-full";
     body.appendChild(createSidebar());
     body.appendChild(createToDoSection());
