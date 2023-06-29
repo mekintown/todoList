@@ -1,10 +1,17 @@
 let taskId = 0;
 
-const Task = (title = "", description = "", dueDate = null, priority = 0) => {
+const Task = (
+    title = "",
+    project = 0,
+    description = "",
+    dueDate = null,
+    priority = 0
+) => {
     let _title = title;
     let _description = description;
     let _dueDate = dueDate;
     let _priority = priority;
+    let _project = project;
     const _id = taskId++;
 
     return {
@@ -34,6 +41,12 @@ const Task = (title = "", description = "", dueDate = null, priority = 0) => {
         },
         set priority(value) {
             _priority = value;
+        },
+        get project() {
+            return _project;
+        },
+        set project(value) {
+            _project = value;
         },
     };
 };

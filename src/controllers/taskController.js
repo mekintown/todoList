@@ -2,10 +2,11 @@ import eventAggregator from "../utils/eventAggregator";
 import Task from "../models/Task";
 import TaskManager from "../models/TaskManager";
 import renderTask from "../views/taskView";
+import ProjectManager from "../models/ProjectManager";
 
 const runTaskScript = () => {
     eventAggregator.subscribe("quickAddTask", (eventArgs) => {
-        const task = Task(eventArgs.title);
+        const task = Task(eventArgs.title, ProjectManager.activeProjectId);
         TaskManager.addTask(task);
         TaskManager.sortTasks();
         renderTask(eventArgs.tasksDiv);
@@ -27,6 +28,8 @@ const runTaskScript = () => {
             TaskManager.getActiveTask()
         );
 
+        document.getElementById("taskProject").textContent =
+            ProjectManager.getProject(activeTask.project).name;
         document.getElementById("taskTitleInput").value = activeTask.title;
         document.getElementById("notesTextArea").value = activeTask.description;
         if (activeTask.dueDate) {

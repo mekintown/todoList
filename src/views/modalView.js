@@ -12,6 +12,7 @@ export function createAddTaskModal() {
     const taskProject = document.createElement("h5");
     taskProject.textContent = "Home";
     taskProject.className = "text-sm text-gray-500 tracking-wide";
+    taskProject.id = "taskProject";
     header.appendChild(taskProject);
 
     const closeButton = document.createElement("button");

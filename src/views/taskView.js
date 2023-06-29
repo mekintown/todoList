@@ -2,12 +2,15 @@ import TaskManager from "../models/TaskManager";
 import greenCircleSrc from "../assets/img/greenCircle.svg";
 import trashSrc from "../assets/img/trash.svg";
 import eventAggregator from "../utils/eventAggregator";
-import Task from "../models/Task";
+import ProjectManager from "../models/ProjectManager";
 
 function renderTask(tasks) {
     tasks.textContent = "";
 
     TaskManager.tasks.forEach((task) => {
+        if (task.project !== ProjectManager.activeProjectId) {
+            return;
+        }
         const taskDiv = document.createElement("div");
         taskDiv.id = `task-${task.id}`;
         taskDiv.className =
@@ -36,7 +39,6 @@ function renderTask(tasks) {
         const rightTask = document.createElement("div");
         rightTask.className = "flex items-center justify-between gap-2";
 
-        console.log(task);
         const dueDate = document.createElement("h3");
         dueDate.className = "text-slate-400 text-sm font-medium";
         if (task.dueDate === null || task.dueDate === "") {
