@@ -5,11 +5,9 @@ import renderTask from "../views/taskView";
 
 const runTaskScript = () => {
     eventAggregator.subscribe("quickAddTask", (eventArgs) => {
-        console.log("Title", eventArgs);
         const task = Task(eventArgs.title);
         TaskManager.addTask(task);
         TaskManager.sortTasks();
-        console.log(eventArgs);
         renderTask(eventArgs.tasksDiv);
     });
 };

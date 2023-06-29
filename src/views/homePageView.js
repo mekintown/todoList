@@ -122,7 +122,6 @@ function createAddTaskSection() {
                 title: event.target.value,
                 tasksDiv: document.querySelector(".tasksDiv"),
             });
-            console.log("Add Task Published");
         }
     });
 
