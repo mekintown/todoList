@@ -10,6 +10,11 @@ const runTaskScript = () => {
         TaskManager.sortTasks();
         renderTask(eventArgs.tasksDiv);
     });
+    eventAggregator.subscribe("deleteTask", (eventArgs) => {
+        const taskElement = document.getElementById(`task-${eventArgs.taskId}`);
+        taskElement.parentElement.removeChild(taskElement);
+        TaskManager.deleteTask(eventArgs.taskId);
+    });
 };
 
 export default runTaskScript;

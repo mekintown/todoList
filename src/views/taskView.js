@@ -8,6 +8,7 @@ function renderTask(tasks) {
 
     TaskManager.tasks.forEach((task) => {
         const taskDiv = document.createElement("div");
+        taskDiv.id = `task-${task.id}`;
         taskDiv.className =
             "flex justify-between self-stretch items-center rounded bg-white shadow-lg p-3 cursor-pointer hover:bg-gray-50";
 
@@ -42,7 +43,7 @@ function renderTask(tasks) {
             "w-4 text-slate-400 cursor-pointer hover:animate-shake";
         closeButton.addEventListener("click", (event) => {
             console.log(event);
-            eventAggregator.publish("deleteTask", { eventname: event });
+            eventAggregator.publish("deleteTask", { taskId: task.id });
         });
         rightTask.appendChild(closeButton);
 

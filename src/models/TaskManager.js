@@ -11,6 +11,13 @@ const TaskManager = (() => {
         _tasks.sort((a, b) => compareAsc(a.dueDate, b.dueDate));
     };
 
+    const deleteTask = (id) => {
+        const taskIndex = _tasks.findIndex((task) => task.id === id);
+        if (taskIndex !== -1) {
+            _tasks.splice(taskIndex, 1);
+        }
+    };
+
     const getTodayTasks = () => _tasks.filter((task) => isToday(task.dueDate));
 
     return {
@@ -20,6 +27,7 @@ const TaskManager = (() => {
         },
         sortTasks,
         getTodayTasks,
+        deleteTask,
     };
 })();
 
