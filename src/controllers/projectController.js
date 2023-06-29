@@ -1,4 +1,4 @@
-function timeNow() {
+export function timeNow() {
     const monthInitials = [
       "Jan", "Feb", "Mar", "Apr", "May", "Jun",
       "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -12,7 +12,7 @@ function timeNow() {
     return [day, date, month];
 }
 
-function generateGreetingMessage() {
+export function generateGreetingMessage() {
   const currentTime = new Date();
   const currentHour = currentTime.getHours();
   let greetingMessage;
@@ -27,5 +27,3 @@ function generateGreetingMessage() {
 
   return greetingMessage;
 }
-
-export default timeNow;
