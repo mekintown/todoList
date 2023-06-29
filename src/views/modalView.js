@@ -42,6 +42,31 @@ export function createAddTaskModal() {
     const legend = document.createElement("legend");
     legend.textContent = "";
 
+    const buttonSection = document.createElement("div");
+    buttonSection.className = "grid grid-cols-2 gap-10";
+    const clearButton = document.createElement("button");
+    clearButton.textContent = "Clear";
+    clearButton.className =
+        "bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded";
+    buttonSection.appendChild(clearButton);
+    clearButton.addEventListener("click", () => {
+        event.preventDefault();
+        taskTitleInput.value = "";
+        notesTextArea.value = "";
+        dateTimePicker.value = "";
+    });
+
+    const addButton = document.createElement("button");
+    addButton.textContent = "Add";
+    addButton.className =
+        "bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded";
+    buttonSection.appendChild(addButton);
+    addButton.addEventListener("click", () => {
+        event.preventDefault();
+    });
+
+    form.appendChild(buttonSection);
+
     modal.appendChild(form);
 
     return modal;
@@ -50,7 +75,7 @@ export function createAddTaskModal() {
 export function createOverlay() {
     const overlay = document.createElement("div");
     overlay.className =
-        "fixed inset-0 w-full h-full opacity-10 bg-bg-slate-50 z-49";
+        "fixed inset-0 w-full h-full opacity-10 bg-slate-200 z-49";
 
     return overlay;
 }

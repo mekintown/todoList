@@ -9,7 +9,11 @@ import allTaskIconSrc from "../assets/img/allTaskIcon.svg";
 import eventAggregator from "../utils/eventAggregator";
 import renderTask from "./taskView";
 import renderProject from "./projectView";
-import { createAddProjectModal, createOverlay } from "./modalView";
+import {
+    createAddProjectModal,
+    createOverlay,
+    createAddTaskModal,
+} from "./modalView";
 
 import "../style.css";
 
@@ -196,8 +200,8 @@ function createToDoSection() {
 
 function createView() {
     const body = document.querySelector("body");
-    // body.appendChild(createOverlay());
-    // body.appendChild(createAddProjectModal());
+    body.appendChild(createOverlay());
+    body.appendChild(createAddTaskModal());
     body.className = "grid grid-cols-5 w-full";
     body.appendChild(createSidebar());
     body.appendChild(createToDoSection());

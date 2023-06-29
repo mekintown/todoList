@@ -12,6 +12,11 @@ function renderTask(tasks) {
         taskDiv.className =
             "flex justify-between self-stretch items-center rounded bg-white shadow-lg p-3 cursor-pointer hover:bg-gray-50";
 
+        taskDiv.addEventListener("click", () => {
+            console.log("editTaskRequest");
+            eventAggregator.publish("editTaskRequest", {});
+        });
+
         const leftTask = document.createElement("div");
         leftTask.className = "flex justify-between gap-2";
         const circleImg = new Image();
@@ -41,8 +46,7 @@ function renderTask(tasks) {
         closeButton.src = trashSrc;
         closeButton.className =
             "w-4 text-slate-400 cursor-pointer hover:animate-shake";
-        closeButton.addEventListener("click", (event) => {
-            console.log(event);
+        closeButton.addEventListener("click", () => {
             eventAggregator.publish("deleteTask", { taskId: task.id });
         });
         rightTask.appendChild(closeButton);
