@@ -29,3 +29,5 @@ function renderProject(projectsDiv) {
     nav.appendChild(ul);
     projectsDiv.appendChild(nav);
 }
+
+export default renderProject;
