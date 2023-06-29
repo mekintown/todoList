@@ -1,10 +1,16 @@
+let taskId = 0;
+
 const Task = (title = "", description = "", dueDate = null, priority = 0) => {
     let _title = title;
     let _description = description;
     let _dueDate = dueDate;
     let _priority = priority;
+    const _id = taskId++;
 
     return {
+        get id() {
+            return _id;
+        },
         get title() {
             return _title;
         },

@@ -1,6 +1,7 @@
 import TaskManager from "../models/TaskManager";
 import greenCircleSrc from "../assets/img/greenCircle.svg";
 import trashSrc from "../assets/img/trash.svg";
+import eventAggregator from "../utils/eventAggregator";
 
 function renderTask(tasks) {
     tasks.textContent = "";
@@ -39,6 +40,10 @@ function renderTask(tasks) {
         closeButton.src = trashSrc;
         closeButton.className =
             "w-4 text-slate-400 cursor-pointer hover:animate-shake";
+        closeButton.addEventListener("click", (event) => {
+            console.log(event);
+            eventAggregator.publish("deleteTask", { eventname: event });
+        });
         rightTask.appendChild(closeButton);
 
         taskDiv.appendChild(rightTask);
