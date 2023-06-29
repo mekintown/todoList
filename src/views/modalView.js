@@ -49,7 +49,22 @@ export function createAddTaskModal() {
 
 export function createOverlay() {
     const overlay = document.createElement("div");
-    overlay.className = "fixed inset-0 w-full h-full backdrop-blur-sm z-49";
+    overlay.className =
+        "fixed inset-0 w-full h-full opacity-10 bg-bg-slate-50 z-49";
 
     return overlay;
+}
+
+export function createAddProjectModal() {
+    const modal = document.createElement("section");
+    modal.className =
+        "flex flex-col  items-stretch justify-center w-96 gap-5 p-5 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-50  drop-shadow rounded z-50";
+
+    const projectTitleInput = document.createElement("input");
+    projectTitleInput.type = "text";
+    projectTitleInput.placeholder = "Project Title";
+    projectTitleInput.className = "p-3";
+    modal.appendChild(projectTitleInput);
+
+    return modal;
 }
