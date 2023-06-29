@@ -4,9 +4,12 @@ import ProjectManager from "../models/ProjectManager";
 import renderProject from "../views/projectView";
 
 const runProjectScript = () => {
+    const defaultProject = Project("Home");
+    ProjectManager.addProject(defaultProject);
+
     eventAggregator.subscribe("addProject", (eventArgs) => {
-        const task = Project(eventArgs.title);
-        ProjectManager.addTask(task);
+        const project = Project(eventArgs.title);
+        ProjectManager.addProject(project);
         renderProject(eventArgs.projectsDiv);
     });
 };

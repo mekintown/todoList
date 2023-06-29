@@ -1,13 +1,14 @@
 import {
     timeNow,
     generateGreetingMessage,
-} from "../controllers/projectController";
+} from "../controllers/homeController";
 import voidImageSrc from "../assets/img/void.svg";
 import todayIconSrc from "../assets/img/todayIcon.svg";
 import addTaskIconSrc from "../assets/img/up.svg";
 import allTaskIconSrc from "../assets/img/allTaskIcon.svg";
 import eventAggregator from "../utils/eventAggregator";
 import renderTask from "./taskView";
+import renderProject from "./projectView";
 
 import "../style.css";
 
@@ -58,7 +59,7 @@ function createSidebar() {
     sidebar.appendChild(nav);
 
     const projectSection = document.createElement("section");
-    projectSection.className = "flex self-stretch";
+    projectSection.className = "flex flex-col self-stretch";
 
     const projectSectionHeader = document.createElement("header");
     projectSectionHeader.className =
@@ -76,11 +77,10 @@ function createSidebar() {
 
     projectSection.appendChild(projectSectionHeader);
 
-    const projectNav = document.createElement("nav");
-
-    const projectUl = document.createElement("ul");
-    projectNav.appendChild(projectUl);
-    projectSection.appendChild(projectNav);
+    const projectsDiv = document.createElement("div");
+    projectsDiv.className = "flex flex-col";
+    renderProject(projectsDiv);
+    projectSection.appendChild(projectsDiv);
 
     sidebar.appendChild(projectSection);
 
