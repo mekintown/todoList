@@ -12,11 +12,20 @@ const TaskManager = (() => {
         _tasks.sort((a, b) => compareAsc(a.dueDate, b.dueDate));
     };
 
+    const findTaskIndexById = (id) =>
+        _tasks.findIndex((task) => task.id === id);
+
+    const findTaskById = (id) => _tasks[findTaskIndexById(id)];
+
     const deleteTask = (id) => {
-        const taskIndex = _tasks.findIndex((task) => task.id === id);
+        const taskIndex = findTaskIndexById(id);
         if (taskIndex !== -1) {
             _tasks.splice(taskIndex, 1);
         }
+    };
+
+    const updateTask = (id, updateField, updateValue) => {
+        _tasks[findTaskIndexById(id)][updateField] = updateValue;
     };
 
     const getTodayTasks = () => _tasks.filter((task) => isToday(task.dueDate));
@@ -36,6 +45,8 @@ const TaskManager = (() => {
         deleteTask,
         setActiveTask,
         getActiveTask,
+        findTaskById,
+        updateTask,
     };
 })();
 

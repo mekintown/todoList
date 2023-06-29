@@ -1,4 +1,5 @@
 import eventAggregator from "../utils/eventAggregator";
+import TaskManager from "../models/TaskManager";
 
 export function createAddTaskModal() {
     const modal = document.createElement("section");
@@ -30,22 +31,29 @@ export function createAddTaskModal() {
     taskTitleInput.type = "text";
     taskTitleInput.placeholder = "Title";
     taskTitleInput.className = "p-3";
+    taskTitleInput.id = "taskTitleInput";
     form.appendChild(taskTitleInput);
 
     const notesTextArea = document.createElement("textarea");
     notesTextArea.placeholder = "notes...";
-    notesTextArea.id = "notes";
+    notesTextArea.id = "notesTextArea";
     notesTextArea.className = "resize-none col-span-2 p-5";
     form.appendChild(notesTextArea);
 
     const dateTimePicker = document.createElement("input");
     dateTimePicker.type = "datetime-local";
+    dateTimePicker.id = "dateTimePicker";
     dateTimePicker.className = "p-3 placeholder-gray-50";
     form.appendChild(dateTimePicker);
 
     const fieldset = document.createElement("fieldset");
     const legend = document.createElement("legend");
     legend.textContent = "";
+
+    const activeTask = TaskManager.getActiveTask();
+    if (activeTask) {
+        taskTitleInput.value = "yeah";
+    }
 
     const buttonSection = document.createElement("div");
     buttonSection.className = "grid grid-cols-2 gap-10";

@@ -2,6 +2,7 @@ import TaskManager from "../models/TaskManager";
 import greenCircleSrc from "../assets/img/greenCircle.svg";
 import trashSrc from "../assets/img/trash.svg";
 import eventAggregator from "../utils/eventAggregator";
+import Task from "../models/Task";
 
 function renderTask(tasks) {
     tasks.textContent = "";
@@ -13,8 +14,8 @@ function renderTask(tasks) {
             "flex justify-between self-stretch items-center rounded bg-white shadow-lg p-3 cursor-pointer hover:bg-gray-50";
 
         taskDiv.addEventListener("click", () => {
-            TaskManager.setActiveTask(task);
-            eventAggregator.publish("editTaskRequest");
+            TaskManager.setActiveTask(task.id);
+            eventAggregator.publish("editTaskRequest", { taskId: task.id });
         });
 
         const leftTask = document.createElement("div");
@@ -33,20 +34,24 @@ function renderTask(tasks) {
         taskDiv.appendChild(leftTask);
 
         const rightTask = document.createElement("div");
-        rightTask.className = "flex justify-between gap-2";
+        rightTask.className = "flex items-center justify-between gap-2";
 
+        console.log(task);
         const dueDate = document.createElement("h3");
         dueDate.className = "text-slate-400 text-sm font-medium";
-        if (task.dueDate === null) {
+        if (task.dueDate === null || task.dueDate === "") {
             dueDate.textContent = "no due date";
+        } else {
+            dueDate.textContent = task.dueDate;
         }
         rightTask.appendChild(dueDate);
 
         const closeButton = new Image();
         closeButton.src = trashSrc;
         closeButton.className =
-            "w-4 text-slate-400 cursor-pointer hover:animate-shake";
+            "w-6 text-slate-400 cursor-pointer hover:animate-shake";
         closeButton.addEventListener("click", () => {
+            event.stopPropagation();
             eventAggregator.publish("deleteTask", { taskId: task.id });
         });
         rightTask.appendChild(closeButton);

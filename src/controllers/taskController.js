@@ -22,6 +22,17 @@ const runTaskScript = () => {
 
         const addTaskModal = document.querySelector(".addTaskModal");
         addTaskModal.classList.remove("invisible");
+
+        const activeTask = TaskManager.findTaskById(
+            TaskManager.getActiveTask()
+        );
+
+        document.getElementById("taskTitleInput").value = activeTask.title;
+        document.getElementById("notesTextArea").value = activeTask.description;
+        if (activeTask.dueDate) {
+            document.getElementById("dateTimePicker").value =
+                activeTask.dueDate;
+        }
     });
 
     eventAggregator.subscribe("editTaskRequestCancel", () => {
@@ -30,6 +41,29 @@ const runTaskScript = () => {
 
         const addTaskModal = document.querySelector(".addTaskModal");
         addTaskModal.classList.add("invisible");
+    });
+
+    eventAggregator.subscribe("editTaskSubmit", () => {
+        const activeTask = TaskManager.getActiveTask();
+
+        TaskManager.updateTask(
+            activeTask,
+            "title",
+            document.getElementById("taskTitleInput").value
+        );
+        TaskManager.updateTask(
+            activeTask,
+            "description",
+            document.getElementById("notesTextArea").value
+        );
+
+        TaskManager.updateTask(
+            activeTask,
+            "dueDate",
+            document.getElementById("dateTimePicker").value
+        );
+        renderTask(document.querySelector(".tasksDiv"));
+        eventAggregator.publish("editTaskRequestCancel");
     });
 };
 
