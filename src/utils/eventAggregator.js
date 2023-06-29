@@ -1,40 +1,40 @@
 import Event from "../models/Event";
 
 const eventAggregator = (() => {
-  const events = [];
+    const events = [];
 
-  const getEvent = (eventName) => {
-    for (let i = 0; i < events.length; i += 1) {
-      if (eventName === events[i].name) {
-        return events[i];
-      }
-    }
-    return null;
-  };
+    const getEvent = (eventName) => {
+        for (let i = 0; i < events.length; i += 1) {
+            if (eventName === events[i].name) {
+                return events[i];
+            }
+        }
+        return null;
+    };
 
-  const publish = (eventName, eventArgs) => {
-    let event = getEvent(eventName);
+    const publish = (eventName, eventArgs) => {
+        let event = getEvent(eventName);
 
-    if (!event) {
-      event = Event(eventName);
-      events.push(event);
-    }
+        if (!event) {
+            event = Event(eventName);
+            events.push(event);
+        }
 
-    event.fire(eventArgs);
-  };
+        event.fire(eventArgs);
+    };
 
-  const subscribe = (eventName, handler) => {
-    let event = getEvent(eventName);
+    const subscribe = (eventName, handler) => {
+        let event = getEvent(eventName);
 
-    if (!event) {
-      event = Event(eventName);
-      events.push(event);
-    }
+        if (!event) {
+            event = Event(eventName);
+            events.push(event);
+        }
 
-    event.addHandler(handler);
-  };
+        event.addHandler(handler);
+    };
 
-  return { events ,publish, subscribe };
+    return { events, publish, subscribe };
 })();
 
 export default eventAggregator;

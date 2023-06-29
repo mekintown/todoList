@@ -1,50 +1,50 @@
 export function createAddTaskModal() {
-  const modal = document.createElement("section");
-  modal.className =
-    "flex flex-col  items-stretch justify-center w-96 gap-5 p-5 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-50  drop-shadow rounded z-50";
+    const modal = document.createElement("section");
+    modal.className =
+        "flex flex-col  items-stretch justify-center w-96 gap-5 p-5 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-50  drop-shadow rounded z-50";
 
-  const header = document.createElement("header");
-  header.className = "flex justify-between items-center";
-  
-  const taskProject = document.createElement("h5");
-  taskProject.textContent = "Home";
-  taskProject.className = "text-sm text-gray-500 tracking-wide"
-  header.appendChild(taskProject);
+    const header = document.createElement("header");
+    header.className = "flex justify-between items-center";
 
-  const closeButton = document.createElement("button");
-  closeButton.textContent = "x";
-  closeButton.className = "text-xl font-medium text-gray-500";
-  header.appendChild(closeButton);
+    const taskProject = document.createElement("h5");
+    taskProject.textContent = "Home";
+    taskProject.className = "text-sm text-gray-500 tracking-wide";
+    header.appendChild(taskProject);
 
-  modal.appendChild(header);
+    const closeButton = document.createElement("button");
+    closeButton.textContent = "x";
+    closeButton.className = "text-xl font-medium text-gray-500";
+    header.appendChild(closeButton);
 
-  const form = document.createElement("form");
-  form.className = "flex flex-col gap-5";
+    modal.appendChild(header);
 
-  const taskTitleInput = document.createElement("input");
-  taskTitleInput.type = "text";
-  taskTitleInput.placeholder = "Title";
-  taskTitleInput.className = "p-3";
-  form.appendChild(taskTitleInput);
+    const form = document.createElement("form");
+    form.className = "flex flex-col gap-5";
 
-  const notesTextArea = document.createElement("textarea");
-  notesTextArea.placeholder = "notes...";
-  notesTextArea.id = "notes";
-  notesTextArea.className = "resize-none col-span-2 p-5";
-  form.appendChild(notesTextArea);
+    const taskTitleInput = document.createElement("input");
+    taskTitleInput.type = "text";
+    taskTitleInput.placeholder = "Title";
+    taskTitleInput.className = "p-3";
+    form.appendChild(taskTitleInput);
 
-  const dateTimePicker = document.createElement("input");
-  dateTimePicker.type = "datetime-local"
-  dateTimePicker.className = "p-3 placeholder-gray-50"
-  form.appendChild(dateTimePicker)
+    const notesTextArea = document.createElement("textarea");
+    notesTextArea.placeholder = "notes...";
+    notesTextArea.id = "notes";
+    notesTextArea.className = "resize-none col-span-2 p-5";
+    form.appendChild(notesTextArea);
 
-  const fieldset = document.createElement("fieldset");
-  const legend = document.createElement("legend");
-  legend.textContent = "";
+    const dateTimePicker = document.createElement("input");
+    dateTimePicker.type = "datetime-local";
+    dateTimePicker.className = "p-3 placeholder-gray-50";
+    form.appendChild(dateTimePicker);
 
-  modal.appendChild(form);
+    const fieldset = document.createElement("fieldset");
+    const legend = document.createElement("legend");
+    legend.textContent = "";
 
-  return modal;
+    modal.appendChild(form);
+
+    return modal;
 }
 
 export function createOverlay() {
@@ -53,4 +53,3 @@ export function createOverlay() {
 
     return overlay;
 }
-
