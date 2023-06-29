@@ -6,8 +6,8 @@ import voidImageSrc from "../assets/img/void.svg";
 import todayIconSrc from "../assets/img/todayIcon.svg";
 import addTaskIconSrc from "../assets/img/up.svg";
 import allTaskIconSrc from "../assets/img/allTaskIcon.svg";
-// import {createAddTaskModal, createOverlay} from "./modalView";
 import eventAggregator from "../utils/eventAggregator";
+import renderTask from "./taskView";
 
 import "../style.css";
 
@@ -118,7 +118,8 @@ function createAddTaskSection() {
     addTaskInput.addEventListener("keydown", (event) => {
         if (event.code === "Enter") {
             eventAggregator.publish("quickAddTask", {
-                taskName: event.target.value,
+                title: event.target.value,
+                tasksDiv: document.querySelector(".tasksDiv"),
             });
             console.log("Add Task Published");
         }
@@ -176,6 +177,12 @@ function createToDoSection() {
 
     const toDoListSection = document.createElement("section");
     toDoListSection.className = "flex flex-col gap-5";
+
+    const tasks = document.createElement("div");
+    tasks.className = "tasksDiv flex flex-col gap-2";
+    renderTask(tasks);
+
+    toDoListSection.appendChild(tasks);
 
     toDoListSection.appendChild(createAddTaskSection());
 

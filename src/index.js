@@ -1,8 +1,6 @@
 import "./style.css";
 import createView from "./views/homePageView";
-import Event from "./models/Event";
+import runTaskScript from "./controllers/taskController";
 
+runTaskScript();
 createView();
-
-const myEvent = Event("example");
-console.log(myEvent.name);
