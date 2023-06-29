@@ -32,8 +32,4 @@ const Task = (title = "", description = "", dueDate = null, priority = 0) => {
     };
 };
 
-// Usage:
-const myTask = Task("Test Task", "A task to test", new Date(), 1);
-console.log(myTask.title); // "Test Task"
-myTask.title = "Updated Task";
-console.log(myTask.title); // "Updated Task"
+export default Task;
