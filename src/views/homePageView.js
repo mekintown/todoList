@@ -8,7 +8,6 @@ import {createAddTaskModal, createOverlay} from "./modalView";
 import "../style.css";
 
 function createSidebar() {
-  const body = document.querySelector("body");
   const sidebar = document.createElement("section");
   sidebar.className = "flex flex-col items-start gap-10 py-5";
 
@@ -132,8 +131,7 @@ function createAddTaskSection() {
 }
 
 function createToDoSection() {
-  const body = document.querySelector("body");
-
+  
   const section = document.createElement("section");
   section.className = "col-span-4 flex  flex-col m-10";
   const header = document.createElement("header");
