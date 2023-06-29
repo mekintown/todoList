@@ -1,7 +1,9 @@
+import eventAggregator from "../utils/eventAggregator";
+
 export function createAddTaskModal() {
     const modal = document.createElement("section");
     modal.className =
-        "flex flex-col  items-stretch justify-center w-96 gap-5 p-5 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-50  drop-shadow rounded z-50";
+        "addTaskModal invisible flex flex-col  items-stretch justify-center w-96 gap-5 p-5 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-50  drop-shadow rounded z-50";
 
     const header = document.createElement("header");
     header.className = "flex justify-between items-center";
@@ -14,6 +16,9 @@ export function createAddTaskModal() {
     const closeButton = document.createElement("button");
     closeButton.textContent = "x";
     closeButton.className = "text-xl font-medium text-gray-500";
+    closeButton.addEventListener("click", () => {
+        eventAggregator.publish("editTaskRequestCancel");
+    });
     header.appendChild(closeButton);
 
     modal.appendChild(header);
@@ -63,6 +68,7 @@ export function createAddTaskModal() {
     buttonSection.appendChild(addButton);
     addButton.addEventListener("click", () => {
         event.preventDefault();
+        eventAggregator.publish("editTaskSubmit");
     });
 
     form.appendChild(buttonSection);
@@ -75,8 +81,10 @@ export function createAddTaskModal() {
 export function createOverlay() {
     const overlay = document.createElement("div");
     overlay.className =
-        "fixed inset-0 w-full h-full opacity-10 bg-slate-200 z-49";
-
+        "invisible overlay fixed inset-0 w-full h-full opacity-30 bg-gray-200 z-49";
+    overlay.addEventListener("click", () => {
+        eventAggregator.publish("editTaskRequestCancel");
+    });
     return overlay;
 }
 

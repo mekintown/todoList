@@ -2,6 +2,7 @@ import { isToday, compareAsc } from "date-fns";
 
 const TaskManager = (() => {
     const _tasks = [];
+    let _activeTask = null;
 
     const addTask = (task) => {
         _tasks.push(task);
@@ -20,6 +21,11 @@ const TaskManager = (() => {
 
     const getTodayTasks = () => _tasks.filter((task) => isToday(task.dueDate));
 
+    const setActiveTask = (task) => {
+        _activeTask = task;
+    };
+    const getActiveTask = () => _activeTask;
+
     return {
         addTask,
         get tasks() {
@@ -28,6 +34,8 @@ const TaskManager = (() => {
         sortTasks,
         getTodayTasks,
         deleteTask,
+        setActiveTask,
+        getActiveTask,
     };
 })();
 

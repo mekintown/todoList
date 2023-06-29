@@ -13,8 +13,8 @@ function renderTask(tasks) {
             "flex justify-between self-stretch items-center rounded bg-white shadow-lg p-3 cursor-pointer hover:bg-gray-50";
 
         taskDiv.addEventListener("click", () => {
-            console.log("editTaskRequest");
-            eventAggregator.publish("editTaskRequest", {});
+            TaskManager.setActiveTask(task);
+            eventAggregator.publish("editTaskRequest");
         });
 
         const leftTask = document.createElement("div");

@@ -15,6 +15,22 @@ const runTaskScript = () => {
         taskElement.parentElement.removeChild(taskElement);
         TaskManager.deleteTask(eventArgs.taskId);
     });
+
+    eventAggregator.subscribe("editTaskRequest", () => {
+        const overlay = document.querySelector(".overlay");
+        overlay.classList.remove("invisible");
+
+        const addTaskModal = document.querySelector(".addTaskModal");
+        addTaskModal.classList.remove("invisible");
+    });
+
+    eventAggregator.subscribe("editTaskRequestCancel", () => {
+        const overlay = document.querySelector(".overlay");
+        overlay.classList.add("invisible");
+
+        const addTaskModal = document.querySelector(".addTaskModal");
+        addTaskModal.classList.add("invisible");
+    });
 };
 
 export default runTaskScript;
